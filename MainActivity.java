@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         final LineShapes ls = new LineShapes(new float[]{0.0f, 0.0f, 50.0f, 15.0f});
         sc.add(ls, new ShapeProperties(10.0f, 30.0f));
         final float coo[] = new float[]{0f, 0f};
+        ArrayList<Float> cuu = new ArrayList<>();
         dv.setOnTouchListener((v, event) -> {
-            ArrayList<Float> cuu = new ArrayList<>();
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
                     coo[0] = event.getX();
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             CursiveShape cu = new CursiveShape(cuu2);
                             sc.add(cu, new ShapeProperties(coo[0],coo[1]));
+                            cuu.clear();
                             break;
                     }
                     break;
@@ -80,12 +82,13 @@ public class MainActivity extends AppCompatActivity {
                                 cuu.add(event.getY()-coo[1]);
                                 break;
                         }
+                        break;
             }
             return true;
         });
-        ListView lv = (ListView)findViewById(R.id.shapePalette);
-        lv.setAdapter(new ArrayAdapter<ShapeKind>(this, android.R.layout.simple_list_item_1, ShapeKind.values()));
-        lv.setOnItemClickListener( (adapterView, view, i, l) -> {
+        GridView gv = (GridView) findViewById(R.id.shapePalette);
+        gv.setAdapter(new ArrayAdapter<ShapeKind>(this, android.R.layout.simple_list_item_1, ShapeKind.values()));
+        gv.setOnItemClickListener( (adapterView, view, i, l) -> {
             selectedShapeKind = (ShapeKind) adapterView.getItemAtPosition(i);
         });
         dv.setModel(sc);
