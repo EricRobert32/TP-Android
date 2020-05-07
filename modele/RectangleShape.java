@@ -1,4 +1,4 @@
-package com.example.draw.Modele;
+package com.example.tp2_android_drawing.modele;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
