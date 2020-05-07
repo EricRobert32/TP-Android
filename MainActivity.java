@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 
 import com.example.tp2_android_drawing.modele.CursiveShape;
 import com.example.tp2_android_drawing.modele.LineShape;
-import com.example.tp2_android_drawing.modele.LineShapes;
 
 import com.example.tp2_android_drawing.modele.RectangleShape;
 import com.example.tp2_android_drawing.modele.ShapeBuilder;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                             sc.add(rec,new ShapeProperties(coo[0],coo[1]));
                             */
                             build.setShapeKind(ShapeKind.RECTANGLE);
-                            sc.add(build.build((new Float[] {0f,0f,event.getX()-coo[0],event.getY()-coo[1]},new ShapeProperties(coo[0],coo[1])));
+                            sc.add(build.build(new float[] {0f,0f,event.getX()-coo[0],event.getY()-coo[1]}),new ShapeProperties(coo[0],coo[1]));
                             break;
 
 
@@ -80,13 +80,16 @@ public class MainActivity extends AppCompatActivity {
                                 cuu2[i] = f;
                                 i++;
                             }
-                            /*
+
                             CursiveShape cu = new CursiveShape(cuu2);
                             sc.add(cu, new ShapeProperties(coo[0],coo[1]));
-                            */
+
+                            /*
                             build.setShapeKind(ShapeKind.CURSIVE);
                             sc.add(build.build(cuu2), new ShapeProperties(coo[0],coo[1]));
 
+
+                             */
                             break;
 
                     }
@@ -102,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
-        ListView lv = (ListView)findViewById(R.id.shapePalette);
+        GridView lv = (GridView) findViewById(R.id.shapePalette);
         lv.setAdapter(new ArrayAdapter<ShapeKind>(this, android.R.layout.simple_list_item_1, ShapeKind.values()));
         lv.setOnItemClickListener( (adapterView, view, i, l) -> {
             selectedShapeKind = (ShapeKind) adapterView.getItemAtPosition(i);
