@@ -16,7 +16,7 @@ public class CursiveShape implements DrawableShape {
         Paint noir = new Paint();
         noir.setColor(Color.BLACK);
         noir.setStrokeWidth(5);
-        for(int x =0; x<coordone.length; x+=4){
+        for(int x =0; x<coordone.length-4; x+=4){
             canvas.drawLine(coordone[0+x]+properties.getX(),coordone[1+x]+properties.getY(),coordone[2+x]+properties.getX(), coordone[3+x]+properties.getY(),noir);
         }
     }
