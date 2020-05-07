@@ -5,3 +5,4 @@ public enum ShapeKind {
         RECTANGLE,
         CURSIVE;
 }
+

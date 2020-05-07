@@ -14,6 +14,7 @@ import com.example.tp2_android_drawing.modele.LineShape;
 import com.example.tp2_android_drawing.modele.LineShapes;
 
 import com.example.tp2_android_drawing.modele.RectangleShape;
+import com.example.tp2_android_drawing.modele.ShapeBuilder;
 import com.example.tp2_android_drawing.modele.ShapeContainer;
 import com.example.tp2_android_drawing.modele.ShapeKind;
 import com.example.tp2_android_drawing.modele.ShapeProperties;
@@ -26,11 +27,12 @@ public class MainActivity extends AppCompatActivity {
     private ShapeKind selectedShapeKind;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ShapeBuilder build = new ShapeBuilder();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DrawingView dv = findViewById(R.id.drawingView);
         final ShapeContainer sc = new ShapeContainer();
-        final LineShapes ls = new LineShapes(new float[]{0.0f, 0.0f, 50.0f, 15.0f});
+        final LineShape ls = new LineShape(new float[]{0.0f, 0.0f, 50.0f, 15.0f});
         sc.add(ls, new ShapeProperties(10.0f, 30.0f));
         final float coo[] = new float[]{0f, 0f};
         dv.setOnTouchListener((v, event) -> {
@@ -49,16 +51,27 @@ public class MainActivity extends AppCompatActivity {
                 case MotionEvent.ACTION_UP:
                     switch (selectedShapeKind){
                         case SEGMENT:
+                            /*
                             LineShape line = new LineShape(new float[]{0f,0f,event.getX()-coo[0],event.getY()-coo[1]});
                             sc.add(line,new ShapeProperties(coo[0],coo[1]));
+                            */
+                            build.setShapeKind(ShapeKind.SEGMENT);
+                            sc.add(build.build(new float[]{0f,0f,event.getX()-coo[0],event.getY()-coo[1]}),new ShapeProperties(coo[0],coo[1]));
                             break;
+                             
 
                         case RECTANGLE:
+                            /*
                             RectangleShape rec = new RectangleShape(new float[]{0f,0f,event.getX()-coo[0],event.getY()-coo[1]});
                             sc.add(rec,new ShapeProperties(coo[0],coo[1]));
+                            */
+                            build.setShapeKind(ShapeKind.RECTANGLE);
+                            sc.add(build.build((new Float[] {0f,0f,event.getX()-coo[0],event.getY()-coo[1]},new ShapeProperties(coo[0],coo[1])));
                             break;
 
+
                         case CURSIVE:
+
                             cuu.add(event.getX()-coo[0]);
                             cuu.add(event.getY()-coo[1]);
                             float[] cuu2 = new float[cuu.size()];
@@ -67,9 +80,15 @@ public class MainActivity extends AppCompatActivity {
                                 cuu2[i] = f;
                                 i++;
                             }
+                            /*
                             CursiveShape cu = new CursiveShape(cuu2);
                             sc.add(cu, new ShapeProperties(coo[0],coo[1]));
+                            */
+                            build.setShapeKind(ShapeKind.CURSIVE);
+                            sc.add(build.build(cuu2), new ShapeProperties(coo[0],coo[1]));
+
                             break;
+
                     }
                     break;
 
