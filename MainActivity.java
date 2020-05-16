@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.tp2_android_drawing.modele.CursiveShape;
 import com.example.tp2_android_drawing.modele.LineShape;
-import com.example.tp2_android_drawing.modele.LineShapes;
 
 import com.example.tp2_android_drawing.modele.RectangleShape;
 import com.example.tp2_android_drawing.modele.ShapeBuilder;
